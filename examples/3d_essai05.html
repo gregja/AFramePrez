@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mapping de fractale</title>
+    <meta name="description" content="test">
+    <script src="../js/aframe.js"></script>
+  </head>
+  <body>
+    <a-scene>
+        <a-camera position="0 1.8 6"></a-camera>
+        <a-assets>
+            <img id="texture" src="mandelbrot-zoom-10303.png">
+        </a-assets>
+        <a-dodecahedron position="-5 1 -5" color="green" radius="1.2"
+                src="#texture">
+            <a-animation attribute="color" dur="10000" from="green" to="red"
+                repeat="indefinite">                             
+            </a-animation>
+        </a-dodecahedron>
+        <a-plane width="21" height="7" rotation="-55 0 0" position="-2 -5 -5"
+                color="silver" src="#texture"></a-plane>
+        <a-torus-knot color="orange" radius="1.2" position="-5 1 -5"
+                src="#texture">
+            <a-animation attribute="rotation" dur="10000" fill="forwards"
+                to="0 0 360" repeat="indefinite">
+            </a-animation>    
+        </a-torus-knot>
+        <a-icosahedron color="#FF926B" radius="0.75" position="-4 -2 -2"
+                src="#texture">
+            <a-animation attribute="rotation" dur="2000" fill="backwards"
+              to="0 0 360" repeat="indefinite">
+            </a-animation>  
+        </a-icosahedron>
+        <a-dodecahedron color="#FF926B" radius="0.5" position="-5 -2 0"
+                src="#texture">
+            <a-animation attribute="rotation" dur="10000" fill="forwards"
+             to="0 180 360" repeat="indefinite">
+            </a-animation>  
+        </a-dodecahedron>
+        <a-plane width="9" height="2" position="3 3.502 -5.813" color="gold"
+                 src="#texture"></a-plane>
+        <a-text value="Welcome in the Mandelbrot World" color="black" width="10" 
+                position="-0.113 3.466 -5.749"></a-text>
+        <a-curvedimage src="#texture">
+            <a-animation attribute="rotation" dur="10000" fill="forwards"
+                to="0 0 360" repeat="indefinite">
+            </a-animation> 
+        </a-curvedimage>
+         <a-cylinder color="cyan" 
+                theta-start="0" theta-length="280" 
+                height="3" radius=".5" open-ended="true"
+                src="#texture">
+            <a-animation attribute="rotation" dur="10000" fill="both"
+                to="0 0 360" repeat="indefinite" direction="reverse">
+            </a-animation> 
+         </a-cylinder>
+        <a-box color="tomato" depth="2" height="4" width="0.5">
+            <a-animation attribute="rotation" dur="10000" fill="both"
+                to="0 180 360" repeat="indefinite" direction="alternateReverse">
+            </a-animation>
+        </a-box>
+        <a-box src="#texture"></a-box>
+        <a-sky color="grey"></a-sky>
+    </a-scene>
+  </body>
+</html>

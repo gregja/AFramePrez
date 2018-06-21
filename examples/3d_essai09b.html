@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AR with Mandelbrot Planet</title>
+    <meta name="description" content="test">
+    <script src="../js/AR.js-master/aframe/examples/vendor/aframe/build/aframe.min.js"></script>
+    <script src="../js/AR.js-master/aframe/build/aframe-ar.js"></script>
+  
+  </head>
+  <body>
+    <a-scene embedded arjs="trackingMethod: best;">
+        <a-assets>
+            <img id="texture" src="mandelbrot-zoom-10303.png">
+        </a-assets>
+        <a-sphere radius=".8" position="0 0 0"
+                  color="silver" src="#texture">
+           <a-animation attribute="rotation" to="360 0 0" delay="500" dur="10000" 
+                repeat="indefinite" easing="ease-in-out" ></a-animation>
+        </a-sphere>
+        <a-marker-camera preset="hiro"></a-marker-camera>
+        <a-sky color="grey"></a-sky>
+        <a-camera-static></a-camera-static>
+    </a-scene>
+  </body>
+</html>

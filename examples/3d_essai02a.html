@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Imbrication de sphères</title>
+    <script src="../js/aframe.js"></script>   
+  </head>
+  <body>  
+    <a-scene multiboxes>
+      <a-camera position="0 1.8 6"></a-camera>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="red"></a-cylinder>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="green" 
+        rotation="90 0 0" ></a-cylinder>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="blue" 
+        rotation="0 0 90" ></a-cylinder>
+    <a-sphere position="0 0 0"  radius="1.75" color="#7BC8A4" 
+       roughness="0.2" opacity=".5" >
+      <a-sphere position="-.5 0 0" radius="0.75" color="red" roughness="0.2"></a-sphere>
+      <a-sphere position="0 -.5 0" radius="0.75" color="green" roughness="0.2"></a-sphere>
+      <a-sphere position="0 0 -.5" radius="0.75" color="blue" roughness="0.2"></a-sphere>
+      <a-sphere position="-.5 .5 0" radius="0.75" color="purple" roughness="0.2"></a-sphere>
+      <a-sphere position=".5 0 .5" radius="0.75" color="yellow" roughness="0.2"></a-sphere>
+    </a-sphere>
+  </a-scene>
+  </body>
+</html>

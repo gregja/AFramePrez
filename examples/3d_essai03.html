@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ajout de composants avec Javascript</title>
+    <script src="../js/aframe.js"></script>   
+  </head>
+  <body>
+    <script>
+      /**
+       * Création de 50 boîtes avec positions et échelles randomisées
+       */ 
+      AFRAME.registerComponent('multiboxes', {
+        init: function () {
+          var scene = document.querySelector('a-scene'); 
+          
+          for (var i = 0; i < 50; i++) {
+            var box = document.createElement('a-box');
+            if (i%2) {
+              box.setAttribute('material', {color: 'brown'});
+            } else {
+              box.setAttribute('material', {color: 'grey'});
+            }            
+            box.setAttribute('position', {x: Math.random() * 20 - 10, 
+                                          y: Math.random() * 20 - 10, 
+                                          z: Math.random() * 20 - 10});
+            box.setAttribute('scale', {x: Math.random() , 
+                                        y: Math.random() , 
+                                        z: Math.random() }); 
+            scene.appendChild(box);
+          }
+        }
+      });
+    </script>     
+    <a-scene multiboxes>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="red"></a-cylinder>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="green" 
+        rotation="90 0 0" ></a-cylinder>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="blue" 
+        rotation="0 0 90" ></a-cylinder>
+    </a-scene>
+  </body>
+</html>

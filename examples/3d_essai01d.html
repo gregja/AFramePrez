@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Combinaison des primitives (repositionnées) et des axes</title>
+    <script src="../js/aframe.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="red"></a-cylinder>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="green" rotation="90 0 0" ></a-cylinder>
+      <a-cylinder position="0 0 0" radius="0.02" height="10" color="blue" rotation="0 0 90" ></a-cylinder>
+                
+      <a-box position="-1 0.5 1" rotation="0 45 0" width="2" height="2" depth="2"  color="#4CC3D9"></a-box>
+      <a-sphere position="0 1.25 -1" radius="1.25" color="#EF2D5E"></a-sphere>
+
+      <a-cylinder position="2 0.5 1" radius="0.2" height="3.5" color="#FFC65D"></a-cylinder>
+      <a-plane rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+      <a-sky color="#ECECEC"></a-sky>
+
+    </a-scene>
+  </body>
+</html>

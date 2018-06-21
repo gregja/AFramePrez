@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rotation au clic</title>
+    <script src="../js/aframe.js"></script>  
+  </head>
+  <body>
+    <script>
+  // Tentative pas franchement réussie d'intégrer des polygones 2D
+  //  personnalisés dans A-Frame
+  // Exemple conservé pour mémoire (à revoir)
+
+  /**
+   * Réduction de la précision
+   */
+  function decPrecision(number, precision) {
+    var tmp = parseFloat(number) ;
+    return (tmp.toPrecision(precision));
+  }
+  /**
+   * Polygones en étoile
+   */
+  function star(x, y, z, radius1, radius2, npoints) {
+    //radius1 = radius1;
+    //radius2 = radius2 / 10 + .1;
+    var TWO_PI = Math.PI * 2; 
+    var angle = TWO_PI / npoints;
+    var halfAngle = angle/2.0;
+    var coords = [];
+    for (var a = 0; a < TWO_PI; a += angle) {
+      var sx = x + Math.cos(a) * radius2;
+      var sy = y + Math.sin(a) * radius2;
+      sx = decPrecision(sx, 6);
+      sy = decPrecision(sy, 6);
+      coords.push({x:sx, y:sy, z:z});
+      sx = x + Math.cos(a+halfAngle) * radius1;
+      sy = y + Math.sin(a+halfAngle) * radius1;
+      sx = decPrecision(sx, 6);
+      sy = decPrecision(sy, 6);
+      coords.push({x:sx, y:sy, z:z});
+    }
+    coords.push({x:coords[0].x, y:coords[0].y, z:coords[0].z});
+    console.log(coords);
+    return coords ;
+  }
+
+  var coordinates = AFRAME.utils.coordinates;
+  AFRAME.registerComponent('mystar', {
+    schema: {
+      color: { default: '#000' },
+      path: {
+        default: star(0, 0, 0, 30, 70, 5),
+  
+        // Deserialize path in the form of comma-separated vec3s: `0 0 0, 1 1 1, 2 0 3`.
+        parse: function (value) {
+          console.log(value);
+          var datas = value.split(',');
+          return star(datas[0], datas[1], datas[2], datas[3], datas[4], datas[5])
+          // return value.split(',').map(coordinates.parse);
+        },
+  
+        // Serialize array of vec3s in case someone does setAttribute('line', 'path', [...]).
+        stringify: function (data) {
+          return data.map(coordinates.stringify).join(',');
+        }
+      }
+    },
+    
+    update: function () {
+      var material = new THREE.LineBasicMaterial({
+          color: this.data.color
+      });
+  
+      var geometry = new THREE.Geometry();
+      this.data.path.forEach(function (vec3) {
+        geometry.vertices.push(
+          new THREE.Vector3(vec3.x/10, vec3.y/10, vec3.z/10)
+        );
+      });
+  
+      this.el.setObject3D('mesh', new THREE.Line(geometry, material));
+    },
+    
+    remove: function () {
+      this.el.removeObject3D('mesh');
+    }
+  });
+  </script>      
+  <a-scene>    
+    <a-camera position="0 1.8 6"></a-camera>  
+    <a-assets>
+        <a-mixin id="red" mystar="color: #E20049"></a-mixin>
+        <a-mixin id="blue" mystar="color: blue"></a-mixin>
+    </a-assets>       
+    <a-entity mixin="red" mystar="path: 0, 0, 0, 2, 50, 30">
+        <a-animation attribute="rotation" from="0 0 0" to="0 180 360" repeat="6" 
+        easing="linear"></a-animation>
+    </a-entity> 
+    <a-entity mixin="blue" mystar="path: 0, 0, 1, 80, 100, 40">
+        <a-animation attribute="rotation" from="0 0 0" to="0 0 360" repeat="6" 
+        easing="linear"></a-animation>
+    </a-entity>
+    <a-sky color="white"></a-sky>
+  </a-scene>
+</body>
+</html>
