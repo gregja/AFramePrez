@@ -30,6 +30,12 @@ Si vous ne vous sentez pas à l'aise avec Javascript, vous pouvez vous familiari
 les bases de ce langage au moyen du support "Cours_Javascript_Premiers_Pas.pdf" qui se trouve
 dans le même dépôt.
 
+Si vous vous sentez sufissamment à l'aise avec Javascript et que vous souhaitez mettre en place
+un petit serveur web sous NodeJS, vous pouvez vous appuyer sur le support PDF qui se trouve
+dans le dépôt suivant :
+
+https://github.com/gregja/NodeJSCorner
+
 Je vous souhaite de faire de belles découvertes avec A-Frame, projet très cool qui est soutenu 
 par la Fondation Mozilla. 
 
