@@ -4,27 +4,27 @@
     <meta charset="utf-8">
     <title>A-Frame Basics V1</title>
     <meta name="description" content="Hello, World! • A-Frame">
-    <script src="../js/aframe.js"></script>
-    <script src="w3color.js"></script>
+    <script src="js/aframe.min.js"></script>
+    <script src="js/w3color.js"></script>
     <script>
-        
+
         var myWorker = new Worker('mandelbrot2_worker.js');
         var datas = [];
         var canvas_width = 200;
         var canvas_height = canvas_width;
         var max_colors = 256;
-    
+
         // Prépare the worker
         myWorker.onmessage = function (e) {
             // Solution for Creating Entities.
-            var sceneEl = document.querySelector('a-scene'); 
+            var sceneEl = document.querySelector('a-scene');
             //console.log('datas => '+e.data.length);
             for (var i=0, imax=e.data.length; i < imax ; i++) {
                 var item = e.data[i];
-                
+
                 var tmp_c = item.c + 20;
                 var tmp_col = "rgb("+item.c+","+item.c+","+tmp_c+")";
-                
+
                 var col = w3color(tmp_col, false);
                 col.desaturate(.5);
 
@@ -37,21 +37,21 @@
                 cyl.setAttribute('radius', ".05");
                 cyl.setAttribute('rotation', {x: 0, y: 180, z:0});
                 sceneEl.appendChild(cyl);
-                
+
             }
-            
+
         };
         var myGlobals = {};
         myGlobals.params = { x1: -0.23465625, y1: -0.770833, x2: -0.2169479167, y2: -0.753472, width: 1200, height: 1200, maxIter: 400, lim: 400, colors: 256 };
         //myGlobals.params = { x1: -0.244580, y1: -0.6595703125, x2: -0.22545500, y2: -0.6400390625, width: 20, height: 20, maxIter: 300, lim: 300, colors: 256 };
-        
-        myWorker.postMessage([myGlobals.params.x1, myGlobals.params.y1, 
-            myGlobals.params.x2, myGlobals.params.y2, canvas_width, canvas_height, 
-            myGlobals.params.lim, myGlobals.params.lim, 
+
+        myWorker.postMessage([myGlobals.params.x1, myGlobals.params.y1,
+            myGlobals.params.x2, myGlobals.params.y2, canvas_width, canvas_height,
+            myGlobals.params.lim, myGlobals.params.lim,
             max_colors]); // Sending message as an array to the worker
 
 
-    </script>    
+    </script>
   </head>
   <body>
     <a-scene>
